@@ -7,6 +7,11 @@ function App() {
   const [pacientes, setPacientes] = useState(JSON.parse(localStorage.getItem("pacientes")) ?? []);
   const [paciente, setPaciente] = useState({});
 
+  function eliminarPaciente(id) {
+    const respuesta = confirm("Deseas eliminar a este paciente?");
+    if (respuesta) setPacientes(pacientes.filter((p) => p.id !== id));
+  }
+
   useEffect(() => {
     localStorage.setItem("pacientes", JSON.stringify(pacientes));
   }, [pacientes]);
@@ -35,7 +40,4 @@ function App() {
 
 export default App;
 
-function eliminarPaciente(id) {
-  const respuesta = confirm("Deseas eliminar a este paciente?");
-  if (respuesta) setPacientes(pacientes.filter((p) => p.id !== id));
-}
+
