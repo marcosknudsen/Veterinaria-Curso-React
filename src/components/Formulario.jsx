@@ -10,7 +10,7 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(paciente).length > 0) {
+    if (paciente) {
       setNombre(paciente.nombre);
       setPropietario(paciente.propietario);
       setEmail(paciente.email);
@@ -34,12 +34,12 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
       id: getId(),
     };
 
-    if (paciente.id) {
+    if (paciente) {
       const pacientesActualizados = pacientes.map((p) =>
         p.id === paciente.id ? pacienteObjeto : p
       );
       setPacientes(pacientesActualizados);
-      setPaciente({});
+      setPaciente(null);
     } else {
       pacienteObjeto.id = getId();
       setPacientes([...pacientes, pacienteObjeto]);
@@ -147,10 +147,7 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value={
-            (Object.keys(paciente).length > 0 ? "Editar" : "Añadir") +
-            " paciente"
-          }
+          value={`${paciente ? "Editar" : "Añadir"} paciente`}
         />
       </form>
     </div>

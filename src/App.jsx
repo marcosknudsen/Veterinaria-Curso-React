@@ -5,7 +5,7 @@ import ListadoPacientes from "./components/ListadoPacientes";
 
 function App() {
   const [pacientes, setPacientes] = useState(JSON.parse(localStorage.getItem("pacientes")) ?? []);
-  const [paciente, setPaciente] = useState({});
+  const [paciente, setPaciente] = useState(null);
 
   function eliminarPaciente(id) {
     const respuesta = confirm("Deseas eliminar a este paciente?");
