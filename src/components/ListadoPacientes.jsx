@@ -4,6 +4,7 @@ export default function ListadoPacientes({
   pacientes,
   setPaciente,
   eliminarPaciente,
+  setError
 }) {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -22,6 +23,7 @@ export default function ListadoPacientes({
               paciente={paciente}
               setPaciente={setPaciente}
               eliminarPaciente={eliminarPaciente}
+              setError={setError}
             />
           ))}
         </>

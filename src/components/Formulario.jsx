@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import Error from "./Error.jsx";
 
-function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
+function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setError}) {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
   const [alta, setAlta] = useState("");
   const [sintomas, setSintomas] = useState("");
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (paciente) {
@@ -147,7 +146,7 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
         <div className="flex justify-between w-full">
           {paciente && (
             <button
-              className="bg-red-600 w-1/3 mr-5 hover:bg-red-700 text-white font-bold py-2 px-10 uppercase rounded-lg"
+              className="bg-red-600 p-3 w-2/5 mr-5 text-white uppercase font-bold hover:bg-red-700 cursor-pointer transition-colors rounded-lg"
               onClick={() => {
                 setPaciente(null);
                 setNombre("");

@@ -4,8 +4,11 @@ import Formulario from "./components/Formulario";
 import ListadoPacientes from "./components/ListadoPacientes";
 
 function App() {
-  const [pacientes, setPacientes] = useState(JSON.parse(localStorage.getItem("pacientes")) ?? []);
+  const [pacientes, setPacientes] = useState(
+    JSON.parse(localStorage.getItem("pacientes")) ?? []
+  );
   const [paciente, setPaciente] = useState(null);
+  const [error, setError] = useState(false);
 
   function eliminarPaciente(id) {
     const respuesta = confirm("Deseas eliminar a este paciente?");
@@ -26,12 +29,15 @@ function App() {
           paciente={paciente}
           setPaciente={setPaciente}
           eliminarPaciente={eliminarPaciente}
+          error={error}
+          setError={setError}
         />
         <ListadoPacientes
           pacientes={pacientes}
           paciente={paciente}
           setPaciente={setPaciente}
           eliminarPaciente={eliminarPaciente}
+          setError={setError}
         />
       </div>
     </>
@@ -39,5 +45,3 @@ function App() {
 }
 
 export default App;
-
-
