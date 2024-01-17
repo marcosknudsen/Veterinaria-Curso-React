@@ -144,11 +144,28 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente }) {
             onChange={(e) => setSintomas(e.target.value)}
           />
         </div>
-        <input
-          type="submit"
-          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value={`${paciente ? "Editar" : "Añadir"} paciente`}
-        />
+        <div className="flex justify-between w-full">
+          {paciente && (
+            <button
+              className="bg-red-600 w-1/3 mr-5 hover:bg-red-700 text-white font-bold py-2 px-10 uppercase rounded-lg"
+              onClick={() => {
+                setPaciente(null);
+                setNombre("");
+                setPropietario("");
+                setEmail("");
+                setAlta("");
+                setSintomas("");
+              }}
+            >
+              Cancelar
+            </button>
+          )}
+          <input
+            type="submit"
+            className="bg-indigo-600 p-3 w-full text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors rounded-lg"
+            value={`${paciente ? "Editar" : "Añadir"} paciente`}
+          />
+        </div>
       </form>
     </div>
   );
