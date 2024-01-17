@@ -1,25 +1,35 @@
 import { useState, useEffect } from "react";
 import Error from "./Error.jsx";
 
-function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setError}) {
-  const [nombre, setNombre] = useState("");
-  const [propietario, setPropietario] = useState("");
-  const [email, setEmail] = useState("");
-  const [alta, setAlta] = useState("");
-  const [sintomas, setSintomas] = useState("");
+function Forumlario({
+  setPacientes,
+  pacientes,
+  paciente,
+  setPaciente,
+  error,
+  setError,
+}) {
+
+  const [pacienteActual, setPacienteActual] = useState(null);
 
   useEffect(() => {
     if (paciente) {
-      setNombre(paciente.nombre);
-      setPropietario(paciente.propietario);
-      setEmail(paciente.email);
-      setAlta(paciente.alta);
-      setSintomas(paciente.sintomas);
+      setPacienteActual({
+        ...paciente,
+      });
     }
   }, [paciente]);
 
+  const handleChange = (e) => {
+    setPacienteActual({
+      ...pacienteActual,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const {nombre,propietario,email,alta,sintomas}=pacienteActual
     if ([nombre, propietario, email, alta, sintomas].includes("")) {
       setError(true);
       return;
@@ -46,11 +56,7 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
 
     setError(false);
 
-    setNombre("");
-    setPropietario("");
-    setEmail("");
-    setAlta("");
-    setSintomas("");
+    setPacienteActual(null);
   };
 
   return (
@@ -75,10 +81,11 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
           <input
             id="mascota"
             type="text"
+            name="nombre"
             placeholder="Nombre de la mascota"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            value={pacienteActual?.nombre ?? ""}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-5">
@@ -91,10 +98,11 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
           <input
             id="propietario"
             type="text"
+            name="propietario"
             placeholder="Nombre del propietario"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            value={propietario}
-            onChange={(e) => setPropietario(e.target.value)}
+            value={pacienteActual?.propietario??""}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-5">
@@ -107,10 +115,11 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
           <input
             id="email"
             type="email"
+            name="email"
             placeholder="Email del propietario"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={pacienteActual?.email??""}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-5">
@@ -123,9 +132,10 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
           <input
             id="alta"
             type="date"
+            name="alta"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            value={alta}
-            onChange={(e) => setAlta(e.target.value)}
+            value={pacienteActual?.alta??""}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-5">
@@ -137,10 +147,11 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
           </label>
           <textarea
             id="sintomas"
+            name="sintomas"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
             placeholder="Describe los sintomas"
-            value={sintomas}
-            onChange={(e) => setSintomas(e.target.value)}
+            value={pacienteActual?.sintomas??""}
+            onChange={handleChange}
           />
         </div>
         <div className="flex justify-between w-full">
@@ -149,11 +160,7 @@ function Forumlario({ setPacientes, pacientes, paciente, setPaciente,error,setEr
               className="bg-red-600 p-3 w-2/5 mr-5 text-white uppercase font-bold hover:bg-red-700 cursor-pointer transition-colors rounded-lg"
               onClick={() => {
                 setPaciente(null);
-                setNombre("");
-                setPropietario("");
-                setEmail("");
-                setAlta("");
-                setSintomas("");
+                setPacienteActual(null);
               }}
             >
               Cancelar
