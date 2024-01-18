@@ -27,19 +27,25 @@ function Forumlario({
     });
   };
 
+  const isValid=()=>{
+    if (pacienteActual===null)
+      return false
+    const {nombre,propietario,email,alta,sintomas}=pacienteActual
+    if (!nombre||!propietario||!email||!alta||!sintomas)
+      return false
+    if ([nombre, propietario, email, alta, sintomas].includes(""))
+      return false
+    return true
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {nombre,propietario,email,alta,sintomas}=pacienteActual
-    if ([nombre, propietario, email, alta, sintomas].includes("")) {
+    if (!isValid()) {
       setError(true);
       return;
     }
     const pacienteObjeto = {
-      nombre,
-      propietario,
-      email,
-      alta,
-      sintomas,
+      ...pacienteActual,
       id: getId(),
     };
 
