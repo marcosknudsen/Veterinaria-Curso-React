@@ -8,4 +8,4 @@ The project is very simple, a veterinary patient management system, in which the
 
 ![](https://github.com/marcosknudsen/Veterinaria-Curso-React/assets/84600432/be90323b-9ff1-4264-8f88-c7de20997bbc)
 
-[Try the proyect](https://resilient-sprinkles-833f46.netlify.app/)
+[Try the project](https://resilient-sprinkles-833f46.netlify.app/)
